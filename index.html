@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function () {
+        function isExtNoise(msg, detail) {
+          var s = String(msg || '') + ' ' + String(detail || '');
+          return s.indexOf('MetaMask') !== -1 || s.indexOf('chrome-extension://') !== -1;
+        }
+        window.addEventListener(
+          'unhandledrejection',
+          function (e) {
+            var r = e && e.reason;
+            if (isExtNoise(r && r.message ? r.message : r, r && r.stack)) {
+              e.preventDefault();
+              e.stopImmediatePropagation();
+            }
+          },
+          true
+        );
+        window.addEventListener(
+          'error',
+          function (e) {
+            if (isExtNoise(e && e.message, e && e.filename)) {
+              e.preventDefault();
+              e.stopImmediatePropagation();
+            }
+          },
+          true
+        );
+      })();
+    </script>
+    <title>Cóndores del Sur 1982 — Arcade Malvinas</title>
+    <meta
+      name="description"
+      content="Juego arcade vertical retro estilo Aero Fighters / 1945 ambientado en la Guerra de Malvinas. Elige entre 4 aeronaves argentinas y enfrenta a la flota británica."
+    />
+    <meta property="og:title" content="Cóndores del Sur 1982 — Arcade Malvinas" />
+    <meta
+      property="og:description"
+      content="Juego arcade vertical retro ambientado en la Guerra de Malvinas. Hecho por Juan Martin Echegaray."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-[#05080F] text-slate-100 antialiased selection:bg-[#74ACDF]/30 selection:text-white overflow-hidden">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
